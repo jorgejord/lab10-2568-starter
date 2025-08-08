@@ -2,8 +2,10 @@ import { UserCard } from "../components/UserCard";
 import { cleanUser } from "../libs/CleanUser";
 import axios from "axios";
 import { useState , useEffect  } from "react";
+import type { CardUserProps } from "../libs/CardUserType";
+
 export default function RandomUserPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<CardUserProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [genAmount, setGenAmount] = useState(() => {
     const saved = localStorage.getItem("genAmount");
@@ -34,7 +36,7 @@ export default function RandomUserPage() {
           className="form-control text-center"
           style={{ maxWidth: "100px" }}
           type="number"
-          onChange={(event: any) => setGenAmount(event.target.value)}
+          onChange={(event) => setGenAmount(Number(event.target.value))}
           value={genAmount}
         />
         <button className="btn btn-dark" onClick={generateBtnOnClick}>
